@@ -1,6 +1,8 @@
 # Digraph
 Render directed graphs in Qlik Sense
 
+![alt text](https://github.com/qlikrockstar/digraph/blob/master/preview.png "Directed Graph")
+
 This Extension builds on top of the javascript version viz.js of graphviz (see: https://github.com/mdaines/viz.js/wiki/API) from Mike Daines. It can be used for plotting directed graphs in Qlik Sense to display processes, networks, (material) flow and basically any (directed) relation between nodes.
 
 # Usage
