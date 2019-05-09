@@ -4,6 +4,7 @@ define( ["qlik", "jquery", "./viz", "./full_render" ], function ( qlik, $, Viz, 
 	
 	//append the syle sheet to the head
 	//$("<style>").html(cssContent).appendTo("head");
+
 	
 	return {
 		initialProperties: {
@@ -62,16 +63,17 @@ define( ["qlik", "jquery", "./viz", "./full_render" ], function ( qlik, $, Viz, 
 		snapshot: {
 			canTakeSnapshot: false
 		},
-		paint: function ( $element, layout ) {
-							
-			var renderEngine = layout.myproperties.setting1; // custom variables which hold the custom properties
-			var graph = 'digraph {'; // dot notation start
+		paint: function ( $element, layout ) {					
+			var renderEngine = layout.myproperties.setting1; // custom variables which hold the custom properties			
 			var	hypercube = layout.qHyperCube;
-			var	rowcount = hypercube.qDataPages[0].qMatrix.length;			
+			var	rowcount = hypercube.qDataPages[0].qMatrix.length;
+			var app = qlik.currApp();	// handler for selections										
+
+			var graph = 'digraph {'; // dot notation start
 			
 			// create edges in DOT notation:   from_dimension -> to_dimension [label="measurement"]; 
 			for (var i = 0; i < rowcount; i++) {
-				// get the row of the hypercube				
+				// get the row of the hypercube
 				var edge = "\"" + hypercube.qDataPages[0].qMatrix[i][0].qText + "\" -> \"" + hypercube.qDataPages[0].qMatrix[i][1].qText + "\"" + " \[label=\" " + hypercube.qDataPages[0].qMatrix[i][2].qText + "\"];";
 				// console.log(edge);		
 				graph += edge;	// add edge to graph						
@@ -129,7 +131,29 @@ define( ["qlik", "jquery", "./viz", "./full_render" ], function ( qlik, $, Viz, 
 			  console.error(error);
 			});
 					
-		
+
+			// wait for DOM
+			$( document ).ready(function() {	
+					
+				$(".edge").bind("click",function(){ 										
+					var edgeName = $(this).children('title').text();				
+					// console.log(edgeName);
+					var nodeFrom = edgeName.substring(0, edgeName.indexOf('-'));
+					var nodeTo = edgeName.substring(edgeName.indexOf('>')+1);							
+					// possibly select edge in Qlik Sense, i.e. both FROM and TO at the same time		
+					app.field( hypercube.qDimensionInfo[0].qGroupFieldDefs[0] ).selectMatch(nodeFrom, true );	
+					app.field( hypercube.qDimensionInfo[1].qGroupFieldDefs[0] ).selectMatch(nodeTo, true );									
+				});
+
+				$(".node").bind("click",function(){ 						
+					var nodeName = $(this).children('title').text();					
+					// console.log(nodeName);	
+					// possibly select a single node in Qlik Sense -> what if node is available in both fields FROM and TO? Which field to select? Probably FROM?
+					app.field( hypercube.qDimensionInfo[0].qGroupFieldDefs[0] ).selectMatch(nodeName, true );	
+				});
+							
+			});	
+	
 			return qlik.Promise.resolve();
 		}
 	};
