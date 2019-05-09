@@ -134,21 +134,23 @@ define( ["qlik", "jquery", "./viz", "./full_render" ], function ( qlik, $, Viz, 
 
 			// wait for DOM
 			$( document ).ready(function() {	
-					
+				
+				// enable selections by clicking on an edge: 2 fields get selected
 				$(".edge").bind("click",function(){ 										
 					var edgeName = $(this).children('title').text();				
 					// console.log(edgeName);
 					var nodeFrom = edgeName.substring(0, edgeName.indexOf('-'));
 					var nodeTo = edgeName.substring(edgeName.indexOf('>')+1);							
-					// possibly select edge in Qlik Sense, i.e. both FROM and TO at the same time		
+					// select edge in Qlik Sense, i.e. both FROM and TO at the same time		
 					app.field( hypercube.qDimensionInfo[0].qGroupFieldDefs[0] ).selectMatch(nodeFrom, true );	
 					app.field( hypercube.qDimensionInfo[1].qGroupFieldDefs[0] ).selectMatch(nodeTo, true );									
 				});
 
+				// enable selections by clicking on a node: 1 field gets selected
 				$(".node").bind("click",function(){ 						
 					var nodeName = $(this).children('title').text();					
 					// console.log(nodeName);	
-					// possibly select a single node in Qlik Sense -> what if node is available in both fields FROM and TO? Which field to select? Probably FROM?
+					// select a single node in Qlik Sense -> what if node is available in both fields FROM and TO? Which field to select? Probably FROM?
 					app.field( hypercube.qDimensionInfo[0].qGroupFieldDefs[0] ).selectMatch(nodeName, true );	
 				});
 							
