@@ -71,8 +71,8 @@ define( ["qlik", "jquery", "./viz", "./full_render" ], function ( qlik, $, Viz, 
 			
 			// create edges in DOT notation:   from_dimension -> to_dimension [label="measurement"]; 
 			for (var i = 0; i < rowcount; i++) {
-				// get the row of the hypercube
-				var edge = hypercube.qDataPages[0].qMatrix[i][0].qText + "->" + hypercube.qDataPages[0].qMatrix[i][1].qText + "[label=\"" + hypercube.qDataPages[0].qMatrix[i][2].qText + "\"];";
+				// get the row of the hypercube				
+				var edge = "\"" + hypercube.qDataPages[0].qMatrix[i][0].qText + "\" -> \"" + hypercube.qDataPages[0].qMatrix[i][1].qText + "\"" + " \[label=\" " + hypercube.qDataPages[0].qMatrix[i][2].qText + "\"];";
 				// console.log(edge);		
 				graph += edge;	// add edge to graph						
 			}
