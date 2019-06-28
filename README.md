@@ -13,4 +13,4 @@ Download the zip file and extract it to your local Qlik Sense Desktop Extension 
 
 Graphviz is fast, but due to it's nature to try to draw graphs according to force models trying to minimize edge crossings there IS a limit (not a hard limit, more a practical one) of nodes/edges, which can be plotted inside of Qlik Sense. This depends on the used renderer and the complexity of the DOT representation, as well. Max number of nodes can get as low as less than 100, in contrast I successfully plotted a graph with A LOT more nodes/edges. It heavily relies on the use case. Weird node names or edge values might break the DOT syntax. 
 
-The standalone non-JS version is far more robust and offers higher performance (see: https://www.graphviz.org/ for further information).
+The standalone non-JS version is far more robust and offers higher performance (see: https://www.graphviz.org for further information).
