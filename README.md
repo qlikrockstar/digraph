@@ -7,7 +7,7 @@ This Extension builds on top of the javascript version viz.js of graphviz (see: 
 
 # Usage
 
-Download the zip file and extract it to your local Qlik Sense Desktop Extension folder or import it to a Qlik Sense Server via QMC. Drag&Drop the new Digraph extension to your canvas. Digraph needs 2 dimensions (nodes: "from" and "to") and 1 measure (value for edge).
+Download the zip file and extract it to your local Qlik Sense Desktop Extension folder or import it to a Qlik Sense Server via QMC. Drag&Drop the new Digraph extension to your canvas. Digraph needs 2 dimensions (nodes: "from" and "to") and 1 measure (value for edge). Check out the (minimalistic) demo app for an example.
 
 # Beware
 
