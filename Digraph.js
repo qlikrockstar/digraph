@@ -121,7 +121,8 @@ define( ["qlik", "jquery", "./viz", "./full_render" ], function ( qlik, $, Viz, 
 				$element.html(element);	
 
 				// wrap svg in bounding div to create scrollbars, if neccessary
-				$("svg").wrap("<div id='SVGcontainer' style='overflow:auto;overflow:scroll;height:100%;width:100%'></div>");	
+				// watch out, as this will break the look&feel of Qlik Cloud SaaS -> future work: find a better identifyer for extension only
+				// $("svg").wrap("<div id='SVGcontainer' style='overflow:auto;overflow:scroll;height:100%;width:100%'></div>");	
 			})
 			.catch(error => {
 			  // Create a new Viz instance (@see Caveats page for more info)
